@@ -15,6 +15,7 @@ class AppIcons {
   static const bellIcon = "assets/icons/notification_icon.svg";
     static const logout = "assets/icons/logout_icon.svg";
     static const feature = "assets/icons/Featured icon.svg";
+    static const consumer = "assets/icons/consumer_icon.svg";
 
   // static const eCardICon = "assets/icons/ecard_icon.svg";
   // static const hrInsight = "assets/icons/hr_insight_icon.svg";

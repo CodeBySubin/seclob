@@ -35,11 +35,10 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Consumer<ProfileViewModel>(
       builder: (context, provider, _) {
-        if (provider.isLoading) {
+        if (provider.isLoading || provider.user == null) {
           return Center(child: const CircularProgressIndicator());
         }
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F5),
           appBar: AppBar(
             backgroundColor: const Color(0xFF7B2CBF),
             elevation: 0,
@@ -120,13 +119,13 @@ class _ProfileState extends State<Profile> {
                       SizedBox(height: 20.h),
 
                       _buildMenuItem(
-                        icon: Icons.person_outline,
+                        icon: SvgPicture.asset("assets/icons/head.svg"),
                         title: 'Profile',
                         hasArrow: true,
                         onTap: () {},
                       ),
                       _buildMenuItem(
-                        icon: Icons.dark_mode_outlined,
+                        icon: Image.asset("assets/images/darkmode.png"),
                         title: 'Darkmode',
                         hasToggle: true,
                         toggleValue: isDarkMode,
@@ -137,7 +136,7 @@ class _ProfileState extends State<Profile> {
                         },
                       ),
                       _buildMenuItem(
-                        icon: Icons.notifications_outlined,
+                        icon: SvgPicture.asset(AppIcons.bellIcon),
                         title: 'Notification',
                         hasToggle: true,
                         toggleValue: isNotificationEnabled,
@@ -148,25 +147,29 @@ class _ProfileState extends State<Profile> {
                         },
                       ),
                       _buildMenuItem(
-                        icon: Icons.account_balance_outlined,
+                        icon: SvgPicture.asset("assets/icons/bank.svg"),
                         title: 'Bank Account',
                         hasArrow: true,
                         onTap: () {},
                       ),
                       _buildMenuItem(
-                        icon: Icons.help_outline,
+                        icon: SvgPicture.asset("assets/icons/icon.svg"),
                         title: 'Help & Support',
                         hasArrow: true,
                         onTap: () {},
                       ),
                       _buildMenuItem(
-                        icon: Icons.description_outlined,
+                        icon: SvgPicture.asset(AppIcons.consumer),
                         title: 'Consumer policies',
                         hasArrow: true,
                         onTap: () {},
                       ),
                       _buildMenuItem(
-                        icon: Icons.logout_outlined,
+                        icon: Icon(
+                          Icons.logout_outlined,
+                          size: 24.sp,
+                          color: Colors.red,
+                        ),
                         title: 'Log out',
                         isLogout: true,
                         onTap: _showLogoutDialog,
@@ -183,7 +186,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget _buildMenuItem({
-    required icon,
+    required Widget icon,
     required String title,
     bool hasArrow = false,
     bool hasToggle = false,
@@ -203,11 +206,7 @@ class _ProfileState extends State<Profile> {
             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 4.w),
             child: Row(
               children: [
-                Icon(
-                  icon,
-                  size: 24.sp,
-                  color: isLogout ? Colors.red : Colors.black87,
-                ),
+                icon,
                 SizedBox(width: 16.w),
                 Expanded(
                   child: Text(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seclob/core/routes/app_routes.dart';
+import 'package:seclob/core/utils/storage_helper.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/widgets.dart';
@@ -40,11 +41,12 @@ class OnboardingFooter extends StatelessWidget {
           textButton(
             borderRadius: BorderRadius.circular(30.r),
             size: Size(double.infinity, 60.h),
-            onPressed: () {
+            onPressed: () async{
               if (currentIndex < pageLength - 1) {
                 setIndex(currentIndex + 1); 
               } else {
                 context.go(AppRoutes.login);
+               SecureStorageHelper.setOnboardingSeen();
               }
             },
             text: currentIndex < pageLength - 1
