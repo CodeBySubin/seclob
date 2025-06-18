@@ -1,0 +1,1 @@
+enum Onboardings { next, signin }
